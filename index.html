@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMATRIX | Next-Gen Engineering & Development</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Tamil&family=Noto+Sans+Telugu&family=Noto+Sans+Kannada&family=Noto+Sans+Malayalam&family=Noto+Sans+Devanagari&display=swap');
+        
+        body { 
+            font-family: 'Rajdhani', sans-serif; 
+            background-color: #030712;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Neon Glow Utility Classes */
+        .neon-glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+        .neon-glow-blue {
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.5);
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Glassmorphism Card Style */
+        .cyber-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .cyber-card:hover {
+            border-color: rgba(0, 240, 255, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Cursor Particle Trail styling */
+        .cursor-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff, 0 0 20px #0066ff;
+            z-index: 9999;
+        }
+
+        /* Custom Notification Box styling */
+        #custom-alert {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 relative selection:bg-cyan-500 selection:text-black">
+
+    <!-- Multilingual Indic Canvas Background for Matrix Rain -->
+    <canvas id="matrix-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-25 transition-opacity duration-500"></canvas>
+
+    <!-- Header Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-cyan-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                
+                <!-- Brand Logo & Name (Using exact SVG vector logo matching image) -->
+                <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-12 h-12 rounded-full overflow-hidden group-hover:scale-105 transition duration-300">
+                        <svg class="w-full h-full transform group-hover:rotate-6 transition duration-500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Outer Glowing Gradient Ring -->
+                            <circle cx="250" cy="250" r="240" fill="#030712" stroke="url(#cyan-blue-grad)" stroke-width="12" />
+                            <!-- T Character -->
+                            <path d="M 120 120 H 320 V 160 H 250 V 320 H 190 V 160 H 120 Z" fill="url(#blue-cyan-vert)" />
+                            <!-- M Character -->
+                            <path d="M 230 160 L 290 270 L 350 160 H 400 V 320 H 350 V 240 L 300 320 H 280 L 230 240 V 320 H 200 V 220 Z" fill="#FFFFFF" />
+                            <!-- Circuit Traces top-right -->
+                            <path d="M 290 190 L 370 110 H 420" stroke="#00f0ff" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="420" cy="110" r="12" fill="#00f0ff" />
+                            <path d="M 310 160 L 390 80 H 400" stroke="#00f0ff" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="400" cy="80" r="12" fill="#00f0ff" />
+                            <!-- Orbit Ring -->
+                            <ellipse cx="250" cy="250" rx="210" ry="50" fill="none" stroke="url(#orbit-grad)" stroke-width="12" transform="rotate(-18 250 250)" stroke-linecap="round" />
+                            <!-- Text TECHMATERIX -->
+                            <text x="250" y="380" font-family="'Orbitron', sans-serif" font-weight="900" font-size="34" text-anchor="middle" letter-spacing="2">
+                                <tspan fill="#FFFFFF">TECH</tspan><tspan fill="#00f0ff">MATERIX</tspan>
+                            </text>
+                            <!-- Bottom Underline with /// -->
+                            <path d="M 150 410 H 220 M 280 410 H 350" stroke="#0066ff" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 235 418 L 245 402 M 250 418 L 260 402 M 265 418 L 275 402" stroke="#00f0ff" stroke-width="4" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="cyan-blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="100%" stop-color="#0066ff" />
+                                </linearGradient>
+                                <linearGradient id="blue-cyan-vert" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="100%" stop-color="#0055ff" />
+                                </linearGradient>
+                                <linearGradient id="orbit-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="80%" stop-color="#0077ff" />
+                                    <stop offset="100%" stop-color="transparent" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-orbitron font-extrabold tracking-wider text-white">
+                        TECH<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 neon-text-cyan">MATERIX</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <div class="hidden md:flex space-x-6 items-center font-medium tracking-wider">
+                    <a href="#home" class="text-slate-300 hover:text-cyan-400 transition">HOME</a>
+                    <a href="#services" class="text-slate-300 hover:text-cyan-400 transition">SERVICES</a>
+                    <a href="#team" class="text-slate-300 hover:text-cyan-400 transition">TEAM</a>
+                    
+                    <!-- Matrix Toggle Switch (Top Right Navigation) -->
+                    <button id="matrix-toggle-btn" class="px-3.5 py-1.5 rounded-full border border-cyan-500/50 bg-cyan-950/30 text-xs font-orbitron font-semibold text-cyan-300 flex items-center gap-2 hover:bg-cyan-500/20 transition shadow-sm shadow-cyan-500/30">
+                        <span id="matrix-dot" class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <span id="matrix-status-text">MATRIX: ON</span>
+                    </button>
+
+                    <a href="#contact" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-bold rounded-full group bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:from-cyan-400 group-hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/50 transition">
+                        <span class="relative px-6 py-2.5 transition-all ease-in duration-75 bg-slate-950 rounded-full group-hover:bg-opacity-0">
+                            GET STARTED
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Icon -->
+                <div class="md:hidden flex items-center gap-3">
+                    <button id="mobile-matrix-toggle" class="px-2.5 py-1 rounded-full border border-cyan-500/40 text-xs font-orbitron text-cyan-400">
+                        <span id="mobile-matrix-status">MATRIX: ON</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-cyan-400 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950/95 border-b border-cyan-900/40 px-6 py-6 space-y-4 font-orbitron">
+            <a href="#home" class="block text-slate-300 hover:text-cyan-400">HOME</a>
+            <a href="#services" class="block text-slate-300 hover:text-cyan-400">SERVICES</a>
+            <a href="#team" class="block text-slate-300 hover:text-cyan-400">TEAM</a>
+            <a href="#contact" class="block text-cyan-400 font-bold">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-36 pb-24 min-h-screen flex items-center justify-center overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            
+            <!-- Neon Monogram Badge Graphic (Identical to Brand Badge Logo) -->
+            <div class="hero-anime-el mb-8 inline-block">
+                <div class="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-blue-600 to-cyan-300 shadow-2xl shadow-cyan-500/40 animate-pulse">
+                    <div class="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden p-3">
+                        <svg class="w-full h-full" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Inner Glow -->
+                            <circle cx="250" cy="250" r="230" fill="#030712" stroke="url(#hero-cyan-blue)" stroke-width="12" />
+                            <!-- Bold T -->
+                            <path d="M 120 120 H 320 V 160 H 250 V 320 H 190 V 160 H 120 Z" fill="url(#hero-blue-cyan)" />
+                            <!-- White Faceted M -->
+                            <path d="M 230 160 L 290 270 L 350 160 H 400 V 320 H 350 V 240 L 300 320 H 280 L 230 240 V 320 H 200 V 220 Z" fill="#FFFFFF" />
+                            <!-- Circuit Node Traces -->
+                            <path d="M 290 190 L 370 110 H 420" stroke="#00f0ff" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="420" cy="110" r="12" fill="#00f0ff" />
+                            <path d="M 310 160 L 390 80 H 400" stroke="#00f0ff" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="400" cy="80" r="12" fill="#00f0ff" />
+                            <!-- Orbit Ring -->
+                            <ellipse cx="250" cy="250" rx="210" ry="50" fill="none" stroke="url(#hero-orbit)" stroke-width="12" transform="rotate(-18 250 250)" stroke-linecap="round" />
+                            <!-- Brand Text -->
+                            <text x="250" y="380" font-family="'Orbitron', sans-serif" font-weight="900" font-size="34" text-anchor="middle" letter-spacing="2">
+                                <tspan fill="#FFFFFF">TECH</tspan><tspan fill="#00f0ff">MATERIX</tspan>
+                            </text>
+                            <!-- Underline /// -->
+                            <path d="M 150 410 H 220 M 280 410 H 350" stroke="#0066ff" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 235 418 L 245 402 M 250 418 L 260 402 M 265 418 L 275 402" stroke="#00f0ff" stroke-width="4" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="hero-cyan-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="100%" stop-color="#0066ff" />
+                                </linearGradient>
+                                <linearGradient id="hero-blue-cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="100%" stop-color="#0055ff" />
+                                </linearGradient>
+                                <linearGradient id="hero-orbit" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00f0ff" />
+                                    <stop offset="80%" stop-color="#0077ff" />
+                                    <stop offset="100%" stop-color="transparent" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="hero-anime-el text-4xl sm:text-6xl md:text-7xl font-orbitron font-black tracking-tight mb-6 leading-tight">
+                ENGINEERING THE FUTURE OF <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-200 neon-text-cyan">
+                    DIGITAL & PHYSICAL SYSTEMS
+                </span>
+            </h1>
+
+            <p class="hero-anime-el text-lg sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 font-normal leading-relaxed">
+                From scalable full-stack web architectures and high-performance cross-platform applications to custom hardware prototyping.
+            </p>
+
+            <div class="hero-anime-el flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#services" class="px-8 py-4 rounded-full font-orbitron font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transform hover:scale-105 transition shadow-lg shadow-cyan-500/30">
+                    EXPLORE SERVICES <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-full font-orbitron font-bold text-sm border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 transition">
+                    GET IN TOUCH
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Services Section -->
+    <section id="services" class="py-28 relative z-10 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 section-title">
+                <h2 class="text-3xl sm:text-5xl font-orbitron font-extrabold text-white mb-4">
+                    OUR <span class="text-cyan-400">CORE SERVICES</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto rounded-full mb-4"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Focused engineering solutions optimized for precision, scalability, and performance.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- 1. Website Design -->
+                <div class="service-card cyber-card p-10 rounded-2xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-8 group-hover:scale-110 transition duration-300">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">Website Design</h3>
+                    <p class="text-slate-400 leading-relaxed text-base">
+                        Modern, responsive, and high-converting web applications built with cutting-edge frameworks, fluid animations, and robust backend integrations.
+                    </p>
+                </div>
+
+                <!-- 2. Application Development -->
+                <div class="service-card cyber-card p-10 rounded-2xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-8 group-hover:scale-110 transition duration-300">
+                        <i class="fas fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">Application Development</h3>
+                    <p class="text-slate-400 leading-relaxed text-base">
+                        Powerful mobile and desktop software tailored for speed, scalability, intuitive UI/UX, and real-time cross-platform sync.
+                    </p>
+                </div>
+
+                <!-- 3. Hardware Projects -->
+                <div class="service-card cyber-card p-10 rounded-2xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-8 group-hover:scale-110 transition duration-300">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">Hardware Projects</h3>
+                    <p class="text-slate-400 leading-relaxed text-base">
+                        End-to-end hardware engineering, microcontroller programming, IoT integration, and prototype development built to scale.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Team Section -->
+    <section id="team" class="py-28 relative z-10 bg-slate-900/40 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 section-title">
+                <h2 class="text-3xl sm:text-5xl font-orbitron font-extrabold text-white mb-4">
+                    MEET THE <span class="text-cyan-400">ENGINEERS</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto rounded-full mb-4"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    The specialists driving TechMATRIX forward across web, app, and hardware domains.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- 1. Thaveanesh Kumar -->
+                <div class="team-card cyber-card p-8 rounded-2xl text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-tr from-cyan-400 to-blue-600 mb-6 relative">
+                            <img src="thaveanesh-kumar-output.png" alt="Thaveanesh Kumar" class="w-full h-full rounded-full bg-slate-900 object-cover">
+                        </div>
+                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Thaveanesh Kumar</h3>
+                        <p class="text-cyan-400 font-semibold mb-4 text-sm tracking-widest">WEBSITE DESIGN & ARCHITECTURE</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Architecting modern web solutions, reactive user interfaces, and custom frontend-backend integrations.
+                        </p>
+                    </div>
+                    <!-- GitHub Profile Link -->
+                    <div class="pt-4 border-t border-slate-800/80">
+                        <a href="https://github.com/thaveanesh-kumar-t" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300 group/github text-sm font-medium">
+                            <i class="fab fa-github text-xl group-hover/github:scale-110 transition-transform duration-300"></i>
+                            <span class="group-hover/github:underline font-mono">github.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Arivumadhi -->
+                <div class="team-card cyber-card p-8 rounded-2xl text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-tr from-cyan-400 to-blue-600 mb-6 relative">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Arivumadhi&backgroundColor=0f172a" alt="Arivumadhi" class="w-full h-full rounded-full bg-slate-900 object-cover">
+                        </div>
+                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Arivumadhi</h3>
+                        <p class="text-cyan-400 font-semibold mb-4 text-sm tracking-widest">APPLICATION DEVELOPMENT</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Leading cross-platform application engineering, cloud microservices, and mobile app optimization.
+                        </p>
+                    </div>
+                    <!-- GitHub Profile Link -->
+                    <div class="pt-4 border-t border-slate-800/80">
+                        <a href="https://github.com/arivumadhidr" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300 group/github text-sm font-medium">
+                            <i class="fab fa-github text-xl group-hover/github:scale-110 transition-transform duration-300"></i>
+                            <span class="group-hover/github:underline font-mono">github.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Sudheep -->
+                <div class="team-card cyber-card p-8 rounded-2xl text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-tr from-cyan-400 to-blue-600 mb-6 relative">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sudheep&backgroundColor=0f172a" alt="Sudheep" class="w-full h-full rounded-full bg-slate-900 object-cover">
+                        </div>
+                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Sudheep</h3>
+                        <p class="text-cyan-400 font-semibold mb-4 text-sm tracking-widest">HARDWARE PROJECTS</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Specializing in custom hardware prototyping, microcontroller systems, embedded logic, and IoT setups.
+                        </p>
+                    </div>
+                    <!-- GitHub Profile Link -->
+                    <div class="pt-4 border-t border-slate-800/80">
+                        <a href="https://github.com/Sudeepbb" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300 group/github text-sm font-medium">
+                            <i class="fab fa-github text-xl group-hover/github:scale-110 transition-transform duration-300"></i>
+                            <span class="group-hover/github:underline font-mono">github.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 relative z-10 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="cyber-card rounded-3xl overflow-hidden border border-cyan-500/30 grid grid-cols-1 lg:grid-cols-2">
+                
+                <div class="p-10 lg:p-14 bg-gradient-to-br from-slate-900 via-slate-950 to-cyan-950/40 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-orbitron font-extrabold text-white mb-6">
+                            INITIATE <span class="text-cyan-400">PROJECT</span>
+                        </h2>
+                        <p class="text-slate-400 text-lg mb-10 leading-relaxed">
+                            Have an idea for a website, application, or hardware prototype? Drop us a message to discuss technical requirements.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </div>
+                                <span class="text-slate-300 font-mono text-base">enquerytechmatrix@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                    <i class="fas fa-shield-halved text-lg"></i>
+                                </div>
+                                <span class="text-slate-300 font-mono text-base">Encrypted Communication Protocol</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-slate-800">
+                        <p class="text-xs text-slate-500 uppercase tracking-widest font-orbitron">TechMATRIX Engineering Labs</p>
+                    </div>
+                </div>
+
+                <div class="p-10 lg:p-14 bg-slate-950/80">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">NAME</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">EMAIL</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">SERVICE REQUIRED</label>
+                            <select class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition">
+                                <option>Website Design</option>
+                                <option>Application Development</option>
+                                <option>Hardware Projects</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">PROJECT DETAILS</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition" placeholder="Describe your project specification..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-lg font-orbitron font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition shadow-lg shadow-cyan-500/20">
+                            TRANSMIT MESSAGE
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Floating Alert Notification (Replaces alert()) -->
+    <div id="custom-alert" class="fixed bottom-6 right-6 hidden z-50 p-4 rounded-xl bg-slate-900 border border-cyan-400 text-cyan-300 shadow-2xl shadow-cyan-500/30 flex items-center gap-3">
+        <i class="fas fa-circle-check text-xl"></i>
+        <div>
+            <h4 class="font-orbitron font-bold text-sm text-white">TRANSMISSION SUCCESSFUL</h4>
+            <p class="text-xs text-slate-300">Your message has been dispatched to TechMATRIX engineers.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-500 py-12 border-t border-slate-900 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-full">
+                    <svg class="w-full h-full" viewBox="0 0 500 500" fill="none">
+                        <circle cx="250" cy="250" r="230" fill="#030712" stroke="#00f0ff" stroke-width="14" />
+                        <path d="M 120 120 H 320 V 160 H 250 V 320 H 190 V 160 H 120 Z" fill="#00f0ff" />
+                        <path d="M 230 160 L 290 270 L 350 160 H 400 V 320 H 350 V 240 L 300 320 H 280 L 230 240 V 320 H 200 V 220 Z" fill="#FFFFFF" />
+                    </svg>
+                </div>
+                <span class="text-lg font-orbitron font-bold text-white tracking-wider">TECH<span class="text-cyan-400">MATERIX</span></span>
+            </div>
+            <p class="text-sm mb-6">&copy; 2026 TechMATRIX. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 text-slate-400">
+                <a href="https://github.com/TechMatrixs" class="hover:text-cyan-400 transition"><i class="fab fa-github text-lg"></i></a>
+                <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-instagram text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submit Custom Notification Box
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const alertBox = document.getElementById('custom-alert');
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 4000);
+            e.target.reset();
+        });
+
+        // 2. Multilingual Matrix Rain Animation & ON/OFF Controls
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let isMatrixActive = true;
+        let matrixInterval;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = 'abcdefghijklmnopquestwxyz'+ 
+                      '011001010101∑∫λπ∞=-+!@#$%^&*()_+{}|:"<>?[]\;';
+
+        const fontSize = 20;
+        let columns = Math.floor(window.innerWidth / fontSize);
+        let drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(3, 7, 18, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#006742';
+            ctx.font = `${fontSize}px sans-serif`;
+
+            columns = Math.floor(canvas.width / fontSize);
+            if(drops.length < columns) {
+                while(drops.length < columns) drops.push(Math.floor(Math.random() * -100));
+            }
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        function startMatrix() {
+            if(!matrixInterval) {
+                matrixInterval = setInterval(drawMatrix, 45);
+            }
+            canvas.style.opacity = "0.25";
+        }
+
+        function stopMatrix() {
+            clearInterval(matrixInterval);
+            matrixInterval = null;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.opacity = "0";
+        }
+
+        startMatrix();
+
+        // Matrix Toggle Logic
+        const toggleBtn = document.getElementById('matrix-toggle-btn');
+        const dot = document.getElementById('matrix-dot');
+        const statusText = document.getElementById('matrix-status-text');
+        const mobileToggle = document.getElementById('mobile-matrix-toggle');
+        const mobileStatus = document.getElementById('mobile-matrix-status');
+
+        function toggleMatrixState() {
+            isMatrixActive = !isMatrixActive;
+            if (isMatrixActive) {
+                startMatrix();
+                dot.className = "w-2 h-2 rounded-full bg-cyan-400 animate-ping";
+                statusText.innerText = "MATRIX: ON";
+                mobileStatus.innerText = "MATRIX: ON";
+            } else {
+                stopMatrix();
+                dot.className = "w-2 h-2 rounded-full bg-slate-600";
+                statusText.innerText = "MATRIX: OFF";
+                mobileStatus.innerText = "MATRIX: OFF";
+            }
+        }
+
+        toggleBtn.addEventListener('click', toggleMatrixState);
+        mobileToggle.addEventListener('click', toggleMatrixState);
+
+        // 3. Anime.js Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            anime({
+                targets: '.hero-anime-el',
+                translateY: [40, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(150, {start: 200}),
+                easing: 'easeOutQuad',
+                duration: 1000
+            });
+
+            anime({
+                targets: '.service-card',
+                translateY: [60, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(150, {start: 800}),
+                easing: 'easeOutCubic',
+                duration: 1000
+            });
+        });
+
+        // 4. Cursor Particle Trail
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.25) {
+                const particle = document.createElement('div');
+                particle.className = 'cursor-particle';
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${e.clientX}px`;
+                particle.style.top = `${e.clientY}px`;
+                document.body.appendChild(particle);
+
+                anime({
+                    targets: particle,
+                    scale: [1, 0],
+                    opacity: [1, 0],
+                    translateY: anime.random(-30, 30),
+                    translateX: anime.random(-30, 30),
+                    duration: 800,
+                    easing: 'easeOutExpo',
+                    complete: () => particle.remove()
+                });
+            }
+        });
+    </script>
+</body>
+</html>
