@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Tamil&family=Noto+Sans+Telugu&family=Noto+Sans+Kannada&family=Noto+Sans+Malayalam&family=Noto+Sans+Devanagari&display=swap');
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #0f172a; /* Slate 900 */
+    color: #f3f4f6;
+    overflow-x: hidden;
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Neon Glow Utility Classes - Aggressive Tech (Crimson Red) */
+.neon-glow-red {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4), inset 0 0 10px rgba(220, 38, 38, 0.2);
+}
+.neon-glow-slate {
+    box-shadow: 0 0 25px rgba(71, 85, 105, 0.5);
+}
+.neon-text-red {
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.7), 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+/* Glassmorphism Card Style */
+.cyber-card {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cyber-card:hover {
+    border-color: rgba(220, 38, 38, 0.6);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 30px -10px rgba(220, 38, 38, 0.3);
+}
+
+/* Cursor Particle Trail styling */
+.cursor-particle {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    background: #dc2626;
+    box-shadow: 0 0 10px #dc2626, 0 0 20px #991b1b;
+    z-index: 9999;
+}
+
+/* Custom Notification Box styling */
+#custom-alert {
+    transition: all 0.3s ease-in-out;
+}

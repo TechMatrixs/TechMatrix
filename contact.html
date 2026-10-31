@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiate Project | TechMATRIX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crimson: {
+                            400: '#f87171',
+                            500: '#dc2626',
+                            600: '#b91c1c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-2xl w-full cyber-card rounded-3xl overflow-hidden border border-red-500/30 shadow-2xl shadow-red-500/20">
+        <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-red-950/40 p-8 text-center border-b border-red-500/20">
+            <h2 class="text-3xl font-orbitron font-extrabold text-white mb-2">INITIATE <span class="text-red-500">PROJECT</span></h2>
+            <p class="text-slate-400 font-medium">Submit your technical specifications to the TechMATRIX engineering labs.</p>
+        </div>
+
+        <form id="contact-form" class="p-10 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">NAME</label>
+                    <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition" placeholder="John Doe">
+                </div>
+                <div>
+                    <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">EMAIL</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition" placeholder="john@example.com">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">SERVICE REQUIRED</label>
+                <select id="service" class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition">
+                    <option>Website Design</option>
+                    <option>Application Development</option>
+                    <option>Hardware Projects</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-orbitron text-slate-400 mb-2 tracking-wider">PROJECT DETAILS</label>
+                <textarea id="details" rows="5" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition" placeholder="Describe your project specification..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 rounded-lg font-orbitron font-bold text-sm bg-gradient-to-r from-red-600 to-slate-600 text-white hover:from-red-500 hover:to-slate-500 transition shadow-lg shadow-red-500/20">
+                TRANSMIT MESSAGE
+            </button>
+        </form>
+
+        <div class="p-6 text-center bg-slate-900/50">
+            <a href="index.html" class="text-sm text-slate-500 hover:text-red-400 transition font-orbitron">← RETURN TO MAIN TERMINAL</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                details: document.getElementById('details').value
+            };
+
+            // In a real environment, this would be a fetch call to a backend API (Node.js/Python/PHP)
+            // that then interacts with the SQL database.
+            console.log('Transmitting to SQL Database...', formData);
+
+            alert('TRANSMISSION SUCCESSFUL: Your data has been queued for SQL storage.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
